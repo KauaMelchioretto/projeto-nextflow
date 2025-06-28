@@ -1,6 +1,7 @@
 ### Aplicação simples de API Rest de Postagens ###
 - Objetivo principal de rodar em Pipeline Nextflow
 - Feito com Springboot Java
+- Banco de dados MySQL
 - Implementação de Flyway para execução de migrations
 
 OBS: Necessário instalar o Nextflow para atender o requisito principal do projeto.
