@@ -1,0 +1,7 @@
+{
+  "titulo": "Minha primeira postagem",
+  "conteudo": "Conteúdo",
+  "autor": "Kauã Melchioretto",
+  "curtidas": 0,
+  "palavrasChave": ["java", "spring", "api", "nextflow", "ubuntu"]
+}
