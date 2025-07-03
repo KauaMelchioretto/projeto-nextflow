@@ -19,13 +19,14 @@ process ConsomeAPI_Simples {
     def cmd = ""
 
     if (acao == 'listar') {
-        cmd = "curl -s http://localhost:8080/getPostagens"
+        cmd = "curl -s http://localhost:8000/getPostagens"
     }
     else if (acao == 'buscar') {
-        cmd = "curl -s \"http://localhost:8080/getPostagemPorTitulo?titulo=${titulo}\""
+        def encodedTitulo = java.net.URLEncoder.encode(titulo, "UTF-8")
+        cmd = "curl -s \"http://localhost:8000/getPostagemPorTitulo?titulo=${encodedTitulo}\""
     }
     else if (acao == 'curtir') {
-        cmd = "curl -s -X PUT http://localhost:8080/curtirPostagem/${uuid}"
+        cmd = "curl -s -X PUT http://localhost:8000/curtirPostagem/${uuid}"
     }
     else {
         cmd = "echo \"Ação inválida para processo simples\""
@@ -50,10 +51,10 @@ process ConsomeAPI_ComArquivo {
     def cmd = ""
 
     if (acao == 'criar') {
-        cmd = "curl -s -X POST http://localhost:8080/criarPostagem -H \"Content-Type: application/json\" -d @${arquivo.getName()}"
+        cmd = "curl -s -X POST http://localhost:8000/criarPostagem -H \"Content-Type: application/json\" -d @${arquivo.getName()}"
     }
     else if (acao == 'alterar') {
-        cmd = "curl -s -X PUT http://localhost:8080/alterarPostagem -H \"Content-Type: application/json\" -d @${arquivo.getName()}"
+        cmd = "curl -s -X PUT http://localhost:8000/alterarPostagem -H \"Content-Type: application/json\" -d @${arquivo.getName()}"
     }
     else {
         cmd = "echo \"Ação inválida para processo com arquivo\""
@@ -68,13 +69,13 @@ process ConsomeAPI_ComArquivo {
 workflow {
     if (params.acao in ['listar', 'buscar', 'curtir']) {
         ConsomeAPI_Simples(params.acao, params.titulo, params.uuid)
-        ConsomeAPI_Simples.out.view { println "\n📦 JSON de retorno:\n$it" }
+        ConsomeAPI_Simples.out.view { println "\n JSON de retorno:\n$it" }
     }
     else if (params.acao in ['criar', 'alterar']) {
         ConsomeAPI_ComArquivo(params.acao, file(params.arquivo))
-        ConsomeAPI_ComArquivo.out.view { println "\n📦 JSON de retorno:\n$it" }
+        ConsomeAPI_ComArquivo.out.view { println "\n JSON de retorno:\n$it" }
     }
     else {
-        println "❌ Ação '${params.acao}' não reconhecida."
+        println "Ação '${params.acao}' não reconhecida."
     }
 }

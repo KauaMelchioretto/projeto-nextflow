@@ -42,3 +42,6 @@ build/
 /.nextflow*
 /work/
 /.nextflow/
+
+### env ###
+.env

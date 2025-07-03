@@ -1,11 +1,12 @@
 {
-	"uuid": "a65f08c8-2d69-4d35-8832-824716a572be",
+	"uuid": "a4771f4e-bcfd-4216-9d8f-98746cdb348e",
 	"titulo": "Postagem alterada",
 	"conteudo": "Estou alterando minha postagem",
 	"palavrasChave": [
 		"spring",
 		"java",
 		"api",
-		"nextflow"
+		"nextflow",
+		"docker"
 	]
 }
